@@ -2,10 +2,10 @@
     font-family: open-sans;
     src: url(res/OpenSans.ttf);
 }
-body,input,button {
+body,input,button,select {
     font-family: open-sans,sans-serif;
 }
 #add_inputs_container>* {
     font-weight: 700;
-    
+
 }
