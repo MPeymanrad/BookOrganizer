@@ -5,3 +5,7 @@
 body,input,button {
     font-family: open-sans,sans-serif;
 }
+#add_inputs_container>* {
+    font-weight: 700;
+    
+}
