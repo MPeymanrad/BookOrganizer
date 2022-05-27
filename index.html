@@ -20,6 +20,28 @@
   </head>
   <body>
       <i class="show_favorites fa-regular fa-star btn btn-dark"></i>
+      <div class="overlay"></div>
+      <div class="favoriteModal">
+          <span class="close_btn">&times;</span>
+        <table class="table mt-4 table-bordered text-center">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Author</th>
+                <th scope="col">Publish Year</th>
+                <th scope="col">Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row">test</td>
+                <td scope="row">Unknown</td>
+                <td scope="row">2015</td>
+                <td scope="row">To Read</td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
     <div
       class="container d-flex flex-column justify-content-center align-items-center"
       id="add_inputs_container"
