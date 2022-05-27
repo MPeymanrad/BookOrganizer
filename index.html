@@ -19,6 +19,7 @@
     <title>Your Book Organizer</title>
   </head>
   <body>
+      <i class="show_favorites fa-regular fa-star btn btn-dark"></i>
     <div
       class="container d-flex flex-column justify-content-center align-items-center"
       id="add_inputs_container"
@@ -51,13 +52,13 @@
         id="categInput"
       >
         <option value="uncategorized">Uncategorized</option>
-        <option value="Read">Read</option>
+        <option value="isRead">Is Read</option>
         <option value="ToRead">To Read</option>
       </select>
       <button class="btn btn-warning my-1" id="addBtn">Add</button>
     </div>
     <div class="container table_container">
-      <table class="table mt-4 table-bordered">
+      <table class="table mt-4 table-bordered text-center">
         <thead>
           <tr>
             <th scope="col">Name</th>

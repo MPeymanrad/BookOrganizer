@@ -12,3 +12,16 @@ body,input,button,select {
     font-weight: 700;
 
 }
+.show_favorites {
+    border-radius: 50% !important;
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    position: absolute;
+    top:50%;
+    right: 2%;
+    color: #ffff00;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
