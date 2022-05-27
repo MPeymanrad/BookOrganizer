@@ -5,6 +5,9 @@
 body,input,button,select {
     font-family: open-sans,sans-serif;
 }
+.table_container {
+    overflow: auto;
+}
 #add_inputs_container>* {
     font-weight: 700;
 
