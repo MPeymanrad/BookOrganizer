@@ -19,29 +19,29 @@
     <title>Your Book Organizer</title>
   </head>
   <body>
-      <i class="show_favorites fa-regular fa-star btn btn-dark"></i>
-      <div class="overlay"></div>
-      <div class="favoriteModal">
-          <span class="close_btn">&times;</span>
-        <table class="table mt-4 table-bordered text-center">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Author</th>
-                <th scope="col">Publish Year</th>
-                <th scope="col">Category</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td scope="row">test</td>
-                <td scope="row">Unknown</td>
-                <td scope="row">2015</td>
-                <td scope="row">To Read</td>
-              </tr>
-            </tbody>
-          </table>
-      </div>
+    <i class="show_favorites fa-regular fa-star btn btn-dark"></i>
+    <div class="overlay"></div>
+    <div class="favoriteModal">
+      <span class="close_btn">&times;</span>
+      <table class="table mt-4 table-bordered text-center">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Publish Year</th>
+            <th scope="col">Category</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row">test</td>
+            <td scope="row">Unknown</td>
+            <td scope="row">2015</td>
+            <td scope="row">To Read</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div
       class="container d-flex flex-column justify-content-center align-items-center"
       id="add_inputs_container"
@@ -73,9 +73,9 @@
         aria-label=".form-select-lg example"
         id="categInput"
       >
-        <option value="uncategorized">Uncategorized</option>
-        <option value="isRead">Is Read</option>
-        <option value="ToRead">To Read</option>
+        <option value="Uncategorized">Uncategorized</option>
+        <option value="Is Read">Is Read</option>
+        <option value="To Read">To Read</option>
       </select>
       <button class="btn btn-warning my-1" id="addBtn">Add</button>
     </div>
@@ -93,27 +93,6 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td scope="row">test</td>
-            <td scope="row">Unknown</td>
-            <td scope="row">2015</td>
-            <td scope="row">To Read</td>
-            <td scope="row">
-              <button class="add_to_favorite btn btn-warning">
-                <i class="fa-regular fa-star"></i>
-              </button>
-            </td>
-            <td>
-              <button class="add_to_favorite btn btn-primary">
-                <i class="fa-regular fa-edit"></i>
-              </button>
-            </td>
-            <td>
-              <button class="add_to_favorite btn btn-danger">
-                <i class="fa-regular fa-trash-can"></i>
-              </button>
-            </td>
-          </tr>
         </tbody>
       </table>
     </div>
