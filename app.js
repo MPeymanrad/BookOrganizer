@@ -26,6 +26,10 @@ function clearInputs() {
     yearInput.value = ''
     categInput.value = 'Uncategorized'
 }
+function loadBooks() {
+    books = JSON.parse(localStorage.getItem('books'))
+    generateBookElems(books)
+}
 function addBook() {
   const newBookObj = {
     id:localStorage.length + 1,
@@ -91,6 +95,7 @@ function generateBookElems(books) {
 function setLocalStorage(array) {
   localStorage.setItem("books", JSON.stringify(array));
 }
+window.addEventListener('load',loadBooks)
 showModalBtn.addEventListener("click", showModal);
 closeModalBtn.addEventListener("click", hideModal);
 modalOverlay.addEventListener("click", hideModal);
