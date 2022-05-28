@@ -11,6 +11,8 @@ const closeModalBtn = $.querySelector(".close_btn");
 const modalOverlay = $.querySelector(".overlay");
 
 let books = [];
+let todoEditIndex;
+let isEditing;
 
 function showModal() {
   favoritesModal.style.top = "30%";
@@ -58,6 +60,16 @@ function addToFavorites(id, e) {
   })
   setLocalStorage(books);
 }
+function goToEditMode(id) {
+  todoEditIndex = books.findIndex(function(book) {
+    return book.id === id;
+  })
+  nameInput.value = books[todoEditIndex].name
+  authorInput.value = books[todoEditIndex].author
+  yearInput.value = books[todoEditIndex].year
+  categInput.value = books[todoEditIndex].category
+  isEditing = true;
+}
 function generateBookElems(books) {
   booksTable.innerHTML = "";
   let trElem,
@@ -89,6 +101,9 @@ function generateBookElems(books) {
     });
     editBtn = $.createElement("i");
     editBtn.className = "btn btn-primary fa-regular fa-edit";
+    editBtn.addEventListener('click',function () {
+      goToEditMode(book.id)
+    })
     delBtn = $.createElement("i");
     delBtn.className = "btn btn-danger fa-regular fa-trash-can";
     favoriteTdElem = $.createElement("td");
