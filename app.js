@@ -5,6 +5,7 @@ const yearInput = $.getElementById("yearInput");
 const categInput = $.getElementById("categInput");
 const addBtn = $.getElementById("addBtn");
 const booksTable = $.querySelector(".table_container tbody");
+const favoritesTable = $.querySelector('.favoriteModal tbody')
 const showModalBtn = $.querySelector(".show_favorites");
 const favoritesModal = $.querySelector(".favoriteModal");
 const closeModalBtn = $.querySelector(".close_btn");
@@ -30,11 +31,11 @@ function clearInputs() {
 }
 function loadBooks() {
   books = JSON.parse(localStorage.getItem("books"));
-  generateBookElems(books);
+  generateBookElems(books)
 }
 function addBook() {
   const newBookObj = {
-    id: localStorage.length + 1,
+    id: books.length + 1,
     name: nameInput.value,
     author: authorInput.value,
     year: yearInput.value,
@@ -43,7 +44,7 @@ function addBook() {
   };
   books.push(newBookObj);
   setLocalStorage(books);
-  generateBookElems(books);
+  generateBookElems(books)
   clearInputs();
 }
 function addToFavorites(id, e) {
@@ -78,7 +79,7 @@ function edit() {
   clearInputs();
   isEditing = false;
   setLocalStorage(books);
-  generateBookElems(books);
+  generateBookElems(books)
 }
 function delBook(id) {
   const mainBookIndex = books.findIndex(function (book) {
@@ -86,7 +87,7 @@ function delBook(id) {
   });
   books.splice(mainBookIndex,1)
   setLocalStorage(books)
-  generateBookElems(books)
+  generateBookElems(books,booksTable)
 }
 function generateBookElems(books) {
   booksTable.innerHTML = "";
@@ -146,12 +147,50 @@ function generateBookElems(books) {
     booksTable.appendChild(trElem);
   });
 }
+function generateFavoriteBooks(books) {
+  favoritesTable.innerHTML = "";
+  let trElem,
+    nameTdElem,
+    authorTdElem,
+    yearTdElem,
+    categTdElem;
+  books.forEach(function (book) {
+    nameTdElem = $.createElement("td");
+    nameTdElem.textContent = book.name;
+    authorTdElem = $.createElement("td");
+    authorTdElem.textContent = book.author;
+    yearTdElem = $.createElement("td");
+    yearTdElem.textContent = book.year;
+    categTdElem = $.createElement("td");
+    categTdElem.textContent = book.category;
+    trElem = $.createElement("tr");
+    trElem.append(
+      nameTdElem,
+      authorTdElem,
+      yearTdElem,
+      categTdElem,
+    );
+    favoritesTable.appendChild(trElem);
+  });
+}
+function loadFavorits() {
+  let favorites = []
+  let i = 0;
+  books.forEach(function(book) {
+    if (book.isFavorite) {
+      favorites.push(books[i])
+    }
+    i++;
+  })
+  generateFavoriteBooks(favorites)
+}
 
 function setLocalStorage(array) {
   localStorage.setItem("books", JSON.stringify(array));
 }
 window.addEventListener("load", loadBooks);
 showModalBtn.addEventListener("click", showModal);
+showModalBtn.addEventListener('click',loadFavorits)
 closeModalBtn.addEventListener("click", hideModal);
 modalOverlay.addEventListener("click", hideModal);
 $.addEventListener("keydown", function (e) {
