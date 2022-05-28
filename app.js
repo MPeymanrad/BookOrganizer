@@ -21,18 +21,18 @@ function hideModal() {
   modalOverlay.style.display = "none";
 }
 function clearInputs() {
-    nameInput.value = ''
-    authorInput.value = ''
-    yearInput.value = ''
-    categInput.value = 'Uncategorized'
+  nameInput.value = "";
+  authorInput.value = "";
+  yearInput.value = "";
+  categInput.value = "Uncategorized";
 }
 function loadBooks() {
-    books = JSON.parse(localStorage.getItem('books'))
-    generateBookElems(books)
+  books = JSON.parse(localStorage.getItem("books"));
+  generateBookElems(books);
 }
 function addBook() {
   const newBookObj = {
-    id:localStorage.length + 1,
+    id: localStorage.length + 1,
     name: nameInput.value,
     author: authorInput.value,
     year: yearInput.value,
@@ -42,7 +42,21 @@ function addBook() {
   books.push(newBookObj);
   setLocalStorage(books);
   generateBookElems(books);
-  clearInputs()
+  clearInputs();
+}
+function addToFavorites(id, e) {
+  const mainBookIndex = books.findIndex(function (book) {
+    return book.id === id;
+  });
+  books[mainBookIndex].isFavorite = !books[mainBookIndex].isFavorite;
+  e.target.className = books[mainBookIndex].isFavorite
+    ? "btn btn-warning fa-solid fa-star"
+    : "btn btn-warning fa-regular fa-star";
+  e.target.classList.add("added");
+  e.target.addEventListener('animationend',function () {
+      e.target.classList.remove('added')
+  })
+  setLocalStorage(books);
 }
 function generateBookElems(books) {
   booksTable.innerHTML = "";
@@ -67,11 +81,16 @@ function generateBookElems(books) {
     categTdElem = $.createElement("td");
     categTdElem.textContent = book.category;
     favoriteBtn = $.createElement("i");
-    favoriteBtn.classList = "btn btn-warning fa-regular fa-star";
+    favoriteBtn.className = book.isFavorite
+      ? "btn btn-warning fa-solid fa-star"
+      : "btn btn-warning fa-regular fa-star";
+    favoriteBtn.addEventListener("click", function (e) {
+      addToFavorites(book.id, e);
+    });
     editBtn = $.createElement("i");
-    editBtn.classList = "btn btn-primary fa-regular fa-edit";
+    editBtn.className = "btn btn-primary fa-regular fa-edit";
     delBtn = $.createElement("i");
-    delBtn.classList = "btn btn-danger fa-regular fa-trash-can";
+    delBtn.className = "btn btn-danger fa-regular fa-trash-can";
     favoriteTdElem = $.createElement("td");
     favoriteTdElem.appendChild(favoriteBtn);
     editTdElem = $.createElement("td");
@@ -88,14 +107,14 @@ function generateBookElems(books) {
       editTdElem,
       delTdElem
     );
-    booksTable.appendChild(trElem)
-});
+    booksTable.appendChild(trElem);
+  });
 }
 
 function setLocalStorage(array) {
   localStorage.setItem("books", JSON.stringify(array));
 }
-window.addEventListener('load',loadBooks)
+window.addEventListener("load", loadBooks);
 showModalBtn.addEventListener("click", showModal);
 closeModalBtn.addEventListener("click", hideModal);
 modalOverlay.addEventListener("click", hideModal);
@@ -104,4 +123,4 @@ $.addEventListener("keydown", function (e) {
     hideModal();
   }
 });
-addBtn.addEventListener('click',addBook)
+addBtn.addEventListener("click", addBook);
