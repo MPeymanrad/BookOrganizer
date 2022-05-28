@@ -20,6 +20,12 @@ function hideModal() {
   favoritesModal.style.top = "-100%";
   modalOverlay.style.display = "none";
 }
+function clearInputs() {
+    nameInput.value = ''
+    authorInput.value = ''
+    yearInput.value = ''
+    categInput.value = 'Uncategorized'
+}
 function addBook() {
   const newBookObj = {
     id:localStorage.length + 1,
@@ -32,6 +38,7 @@ function addBook() {
   books.push(newBookObj);
   setLocalStorage(books);
   generateBookElems(books);
+  clearInputs()
 }
 function generateBookElems(books) {
   booksTable.innerHTML = "";
