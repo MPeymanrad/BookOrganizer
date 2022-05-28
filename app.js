@@ -75,10 +75,18 @@ function edit() {
   books[todoEditIndex].author = authorInput.value;
   books[todoEditIndex].year = yearInput.value;
   books[todoEditIndex].category = categInput.value;
-  clearInputs()
+  clearInputs();
   isEditing = false;
-  setLocalStorage(books)
+  setLocalStorage(books);
   generateBookElems(books);
+}
+function delBook(id) {
+  const mainBookIndex = books.findIndex(function (book) {
+    return book.id === id;
+  });
+  books.splice(mainBookIndex,1)
+  setLocalStorage(books)
+  generateBookElems(books)
 }
 function generateBookElems(books) {
   booksTable.innerHTML = "";
@@ -116,6 +124,9 @@ function generateBookElems(books) {
     });
     delBtn = $.createElement("i");
     delBtn.className = "btn btn-danger fa-regular fa-trash-can";
+    delBtn.addEventListener('click',function() {
+      delBook(book.id)
+    })
     favoriteTdElem = $.createElement("td");
     favoriteTdElem.appendChild(favoriteBtn);
     editTdElem = $.createElement("td");
