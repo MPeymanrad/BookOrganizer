@@ -55,20 +55,30 @@ function addToFavorites(id, e) {
     ? "btn btn-warning fa-solid fa-star"
     : "btn btn-warning fa-regular fa-star";
   e.target.classList.add("added");
-  e.target.addEventListener('animationend',function () {
-      e.target.classList.remove('added')
-  })
+  e.target.addEventListener("animationend", function () {
+    e.target.classList.remove("added");
+  });
   setLocalStorage(books);
 }
 function goToEditMode(id) {
-  todoEditIndex = books.findIndex(function(book) {
+  todoEditIndex = books.findIndex(function (book) {
     return book.id === id;
-  })
-  nameInput.value = books[todoEditIndex].name
-  authorInput.value = books[todoEditIndex].author
-  yearInput.value = books[todoEditIndex].year
-  categInput.value = books[todoEditIndex].category
+  });
+  nameInput.value = books[todoEditIndex].name;
+  authorInput.value = books[todoEditIndex].author;
+  yearInput.value = books[todoEditIndex].year;
+  categInput.value = books[todoEditIndex].category;
   isEditing = true;
+}
+function edit() {
+  books[todoEditIndex].name = nameInput.value;
+  books[todoEditIndex].author = authorInput.value;
+  books[todoEditIndex].year = yearInput.value;
+  books[todoEditIndex].category = categInput.value;
+  clearInputs()
+  isEditing = false;
+  setLocalStorage(books)
+  generateBookElems(books);
 }
 function generateBookElems(books) {
   booksTable.innerHTML = "";
@@ -101,9 +111,9 @@ function generateBookElems(books) {
     });
     editBtn = $.createElement("i");
     editBtn.className = "btn btn-primary fa-regular fa-edit";
-    editBtn.addEventListener('click',function () {
-      goToEditMode(book.id)
-    })
+    editBtn.addEventListener("click", function () {
+      goToEditMode(book.id);
+    });
     delBtn = $.createElement("i");
     delBtn.className = "btn btn-danger fa-regular fa-trash-can";
     favoriteTdElem = $.createElement("td");
@@ -138,4 +148,10 @@ $.addEventListener("keydown", function (e) {
     hideModal();
   }
 });
-addBtn.addEventListener("click", addBook);
+addBtn.addEventListener("click", function () {
+  if (isEditing) {
+    edit();
+  } else {
+    addBook();
+  }
+});
