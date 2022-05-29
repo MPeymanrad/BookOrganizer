@@ -31,7 +31,9 @@ function clearInputs() {
 }
 function loadBooks() {
   books = JSON.parse(localStorage.getItem("books"));
-  generateBookElems(books);
+  if (books) {
+    generateBookElems(books);
+  }
 }
 function addBook() {
   const nameValue = nameInput.value.trim();
@@ -100,7 +102,7 @@ function delBook(id) {
     return book.id === id;
   });
   books.splice(mainBookIndex, 1);
-  regenerateBooksIds(books)
+  regenerateBooksIds(books);
   generateBookElems(books);
 }
 function generateBookElems(books) {
@@ -194,12 +196,12 @@ function setLocalStorage(array) {
   localStorage.setItem("books", JSON.stringify(array));
 }
 function regenerateBooksIds(books) {
-  let i = 0
-  books.forEach(function(book) {
+  let i = 0;
+  books.forEach(function (book) {
     book.id = i + 1;
     i++;
-  })
-  setLocalStorage(books)
+  });
+  setLocalStorage(books);
 }
 window.addEventListener("load", loadBooks);
 showModalBtn.addEventListener("click", showModal);
