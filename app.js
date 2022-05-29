@@ -30,8 +30,9 @@ function clearInputs() {
   categInput.value = "Uncategorized";
 }
 function loadBooks() {
-  books = JSON.parse(localStorage.getItem("books"));
-  if (books) {
+  const localStorageBooks = JSON.parse(localStorage.getItem("books"));
+  if (localStorageBooks) {
+    books = localStorageBooks
     generateBookElems(books);
   }
 }
