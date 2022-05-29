@@ -100,8 +100,8 @@ function delBook(id) {
     return book.id === id;
   });
   books.splice(mainBookIndex, 1);
-  setLocalStorage(books);
-  generateBookElems(books, booksTable);
+  regenerateBooksIds(books)
+  generateBookElems(books);
 }
 function generateBookElems(books) {
   booksTable.innerHTML = "";
@@ -192,6 +192,14 @@ function loadFavorits() {
 
 function setLocalStorage(array) {
   localStorage.setItem("books", JSON.stringify(array));
+}
+function regenerateBooksIds(books) {
+  let i = 0
+  books.forEach(function(book) {
+    book.id = i + 1;
+    i++;
+  })
+  setLocalStorage(books)
 }
 window.addEventListener("load", loadBooks);
 showModalBtn.addEventListener("click", showModal);
